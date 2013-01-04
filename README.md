@@ -9,5 +9,7 @@
     
     (require lang/posn) ;; 구조체 라이브러리
 
+    (draw-solid-line start end color) ;; 라인그리기 
+
 * merge-sort 
     * 26.1.2 참조
