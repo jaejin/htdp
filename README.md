@@ -15,6 +15,9 @@
     
 # 수학관련 함수
   * remainder : 나머지
+  
+      (remainder 3 4)
+    
   * degrees->radians : 도를 라디안으로
   * sin, cos, tan : 라디안을 기본적으로 입력 받음
   * pi : 파이 
