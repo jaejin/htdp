@@ -9,7 +9,7 @@
     (draw-solid-line start end color) ;; 라인그리기 `
 
 
-# merge-sort 
+## merge-sort 
     * 26.1.2 참조
     
     
