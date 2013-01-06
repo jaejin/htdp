@@ -14,23 +14,27 @@
    (- (posn-x ZERO) (posn-x posn))
    (+ (posn-y ZERO) (posn-y posn))))
 
-(define A (xy->canvas 0 0))
-(define B (xy->canvas 0 200))
+(define A (xy->canvas (make-posn 0 0)))
+(define B (xy->canvas (make-posn 0 200)))
 
 
 (define (transform a-posn b-posn angle)
   (make-posn 
-   (- (* (- (posn-x (canvas-xy b-posn)) (posn-y (canvas-xy a-posn))) (cos (degrees->radians angle))) 
-      (* (- (posn-x (canvas-xy b-posn)) (posn-y (canvas-xy a-posn))) (sin (degrees->radians angle))))
-   (+ (* (- (posn-x b-posn) (posn-y a-posn)) (sin (degrees->radians angle))) 
-      (* (- (posn-x b-posn) (posn-y a-posn)) (cos (degrees->radians angle))))))
+   (- (* (- (posn-x  b-posn) (posn-x a-posn)) (cos (degrees->radians angle))) 
+      (* (- (posn-y  b-posn) (posn-y a-posn)) (sin (degrees->radians angle))))
+   (+ (* (- (posn-x b-posn) (posn-x a-posn)) (sin (degrees->radians angle))) 
+      (* (- (posn-y b-posn) (posn-y a-posn)) (cos (degrees->radians angle))))))
 
-(define (transform-x angle posn)
-  (make-posn 
-   (* (cos (degrees->radians angle)) (posn-x posn))
-   (posn-y posn)))
+(define (canvas-transform a-posn b-posn angle)
+   (transform (canvas->xy a-posn) (canvas->xy b-posn) angle))
 
-(start 400 400)
+(transform (make-posn 0 0) (make-posn 0 200) 45)
+           
+(xy->canvas (transform (make-posn 0 0) (make-posn 200 200) 45))
+
+(start 400 800)
 (draw-solid-line A B 'black)
-(draw-solid-line A (transform ZERO B 45) 'red)
+(draw-solid-line (make-posn 200 350) (xy->canvas (canvas-transform ZERO B 225)) 'red)
+(draw-solid-line (make-posn 200 250) (xy->canvas (canvas-transform ZERO B -225)) 'red)
+;;(draw-solid-line ZERO (xy->canvas (canvas-transform ZERO B 225)) 'red)
 
